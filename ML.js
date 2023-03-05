@@ -1,29 +1,29 @@
 require('@tensorflow/tfjs');
 const tmImage  =require('@teachablemachine/image');
+
 require('dotenv').config()
 
     // the link to your model provided by Teachable Machine export panel
     const URL = "https://teachablemachine.withgoogle.com/models/pvJeCYXkx/";
     const btn = document.getElementById("onInit")
     let model, webcam, labelContainer, maxPredictions;
-    init()
+    btn.addEventListener('click',init)
 
-    async function init() {
+
+async function init() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
-    const msg = document.getElementById('msg')
+
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // or files from your local hard drive
     // Note: the pose library adds "tmImage" object to your window (window.tmImage)
     model = await tmImage.load(modelURL, metadataURL);
-    if(model){
-        msg.innerHTML = "check img"
-    }
     maxPredictions = model.getTotalClasses();
+
     // Convenience function to setup a webcam
     const flip = true; // whether to flip the webcam
-    webcam = new tmImage.Webcam(375, 375, flip); // width, height, flip
+    webcam = new tmImage.Webcam(376,367, flip); // width, height, flip
     await webcam.setup({ facingMode: "environment" }); // request access to the webcam
     await webcam.play();
     window.requestAnimationFrame(loop);
