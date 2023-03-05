@@ -4,7 +4,7 @@ const http = require("http");
 const PORT = 5000
 
 app.use('/',express.static('public'))
-
+console.log("ss")
 
 app.listen(PORT,()=>{
     console.log("Server listen on "+ PORT)
