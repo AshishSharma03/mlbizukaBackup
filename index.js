@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-const http = require("http");
+
+const path = require("path");
 const PORT = 5000
 
-app.use('/ss',express.static('public'))
+app.use('/',express.static('public'))
 app.use('/',(req,res)=>{
-    res.json("connect")
+    res.sendFile('index.html',{root:path.join(__dirname,"public")})
 })
 
 app.listen(PORT,()=>{
