@@ -1,0 +1,20 @@
+{
+  "name": "formvali",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev":"browserify ML.js -o ./public/bundle.js",
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@teachablemachine/image": "^0.8.5",
+    "@tensorflow/tfjs": "^4.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.21"
+  }
+}
