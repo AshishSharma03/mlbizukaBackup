@@ -27,7 +27,12 @@ body{
     font-weight: 800;
 
 }
-
+#webcam-container-border{
+    position: absolute;
+    padding:  100px;
+    border-radius: 5px;
+    border: 2px solid #44573f00;
+}
 
 .loader {
     border: 2px solid #ffffff; /* Light grey */

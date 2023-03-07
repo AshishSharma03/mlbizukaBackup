@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="./index.css" rel="stylesheet" />
   </head>
-  <body>
+  <body id="body">
     <!-- <button type="button" id="onInit">Start</button> -->
+    <div id="webcam-container-border"></div>
     <div id="label-container">
       <div class="loader"></div>
     </div>
@@ -31,12 +32,14 @@ async function init() {
     await webcam.setup({ facingMode: "environment" }); 
     await webcam.play();
     window.requestAnimationFrame(loop);
-
     document.getElementById("webcam-container").appendChild(webcam.canvas);
+     k = document.getElementById("webcam-container-border")
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) { 
+      k.style.border = "2px solid green"
         labelContainer.appendChild(document.createElement("div"));
     }
+    
 }
 
 async function loop() {
