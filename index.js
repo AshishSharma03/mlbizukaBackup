@@ -9,10 +9,6 @@ app.use('/',(req,res)=>{
     res.sendFile('index.html',{root:path.join(__dirname,"public")})
 })
 
-
-
-
-
 app.listen(PORT,()=>{
     console.log("Server listen on "+ PORT)
 })
