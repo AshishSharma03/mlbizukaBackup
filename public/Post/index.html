@@ -4,9 +4,96 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
     <title>Post</title>
 </head>
 <body>
+    <div style="display: flex;flex-direction:column">
+        <button>Add image</button>
+        <div style="display: flex;flex-direction: column;">
+                <label>Se</label>
+                <select id="selectPlant">
+                </select>
+        </div>
+       
+        <input type="file" onchange="previewFile()"><br>
+        <img src="" height="200" id="ImageL" alt="Image preview...">
+        <button id="PostBtn">POST</button>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    <script type="text/javascript"> 
+            const options = ['Apple','Orange']
+            const selection = document.getElementById('selectPlant')
+            const URL = "https://teachablemachine.withgoogle.com/models/2kTpg1Iwc/";
+            init()
+            const PostItem = document.getElementById('PostBtn')
+            PostItem.addEventListener("click",()=>{
+                    previewFile()
+            })
+
+            function previewFile() {
+                var preview = document.querySelector('img');
+                var file    = document.querySelector('input[type=file]').files[0];
+                var reader  = new FileReader();
+
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+
+                }
+                console.log(file)
+                if (file) {
+                    reader.readAsDataURL(file);
+                    predict(file)
+                } else {
+                    preview.src = "";
+                }
+            }
+
+            
+            options.map((a)=>{
+            const optionEle = document.createElement("option")
+            optionEle.innerHTML = a
+            selection.appendChild(optionEle)
+            })
+            
+            async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+            model = await tmImage.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();
+
+        }
+
+        async function loop() {
+            webcam.update(); 
+            await predict();
+            window.requestAnimationFrame(loop);
+        }
+
+
+
+        async function predict(file) {
+        const prediction = await model.predict(file);
+        for (let i = 0; i < maxPredictions; i++) {
+       var classPrediction =
+       ( prediction[i].probability.toFixed(2) > 0.70)?
+           prediction[i].className + ": " + prediction[i].probability.toFixed(2)
+        :'';
+
+        if(classPrediction !== ''){
+          labelContainer.innerHTML = classPrediction;
+        }
+         
+        }
+
     
+        }
+
+
+            
+
+    </script>
 </body>
 </html>

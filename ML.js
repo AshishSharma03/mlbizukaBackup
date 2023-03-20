@@ -2,7 +2,7 @@ require('@tensorflow/tfjs');
 const tmImage  =require('@teachablemachine/image');
 
 require('dotenv').config()
-    const URL = "https://teachablemachine.withgoogle.com/models/pvJeCYXkx/";
+    const URL = "https://teachablemachine.withgoogle.com/models/VnLQoAhGN/";
     const btn = document.getElementById("onInit")
     let model, webcam, labelContainer, maxPredictions;
     btn.addEventListener('click',init)
